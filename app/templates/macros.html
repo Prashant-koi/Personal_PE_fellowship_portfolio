@@ -1,0 +1,36 @@
+{% macro profile_card(member) %}
+<div class="profile-card">
+    <div class="profile-picture">
+        <img src="{{ url_for('static', filename=member.image) }}" alt="{{ member.name }}">
+    </div>
+    <h1>{{ member.name }}</h1>
+</div>
+{% endmacro %}
+
+{% macro experience_card(job) %}
+<div class="card">
+    <h3>{{ job.title }} — {{ job.company }}</h3>
+    <p class="dates">{{ job.dates }}</p>
+    <p>{{ job.description }}</p>
+</div>
+{% endmacro %}
+
+{% macro education_card(school) %}
+<div class="card">
+    <h3>{{ school.school }}</h3>
+    <p>{{ school.degree }}</p>
+    <p class="dates">{{ school.dates }}</p>
+</div>
+{% endmacro %}
+
+{% macro hobby_card(hobby) %}
+<div class="hobby-card">
+    <button class="hobby-bar" type="button">
+        <span>{{ hobby.name }}</span>
+        <span class="hobby-arrow">▾</span>
+    </button>
+    <div class="hobby-content">
+        <img src="{{ url_for('static', filename=hobby.image) }}" alt="{{ hobby.name }}">
+    </div>
+</div>
+{% endmacro %}

@@ -1,0 +1,287 @@
+p, h1, h2, h3, h4, h5, h6, button {
+    font-family: "Roboto", serif;
+}
+
+body {
+    background-color: #f5f5f9;
+    background-size: cover;
+    width: auto; 
+    overflow-x: hidden;
+    font-family: "Roboto", serif;
+    margin: 0px;
+}
+
+.nav-bar {
+    width: 100%;
+    display: inline-block;
+    background-color: #1C539F;
+    font-family: "Roboto", serif;
+    font-weight: 700 !important;
+    padding-top: 10px;
+}
+
+.nav-content .logo-touch-target {
+    display: inline-flex;
+    height: 60%;
+    width: 350px;
+}
+
+.nav-content .nav-logo {
+    height: 60px;
+    margin: auto;
+}
+
+.nav-logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.nav-logo img {
+    width: 200px;
+}
+
+.nav-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+}
+
+.nav-content nav {
+    display: flex;
+    align-items: center;
+}
+
+.nav-content nav a {
+    color: white;
+    text-decoration: none;
+    margin-left: 20px;
+    font-weight: 500;
+}
+
+.nav-content nav a:hover {
+    text-decoration: underline;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto 40px;
+    padding: 0 20px;
+}
+
+.container h2 {
+    color: #1d539f;
+    margin-bottom: 16px;
+}
+
+.card {
+    background: white;
+    border-radius: 8px;
+    padding: 16px;
+    margin-bottom: 16px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.card h3 {
+    margin-top: 0;
+    color: #1d539f;
+}
+
+.dates {
+    color: #666;
+    font-style: italic;
+    margin: 8px 0;
+}
+
+.hobbies-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    padding-top: 40px;
+}
+
+.hobbies-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.hobby-card {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.hobby-bar {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px;
+    font-size: 18px;
+    font-weight: 500;
+    color: #1d539f;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    text-align: left;
+}
+
+.hobby-arrow {
+    transition: transform 0.3s ease;
+}
+
+.hobby-card.open .hobby-arrow {
+    transform: rotate(180deg);
+}
+
+.hobby-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease;
+}
+
+.hobby-card.open .hobby-content {
+    max-height: 600px;
+}
+
+.hobby-content img {
+    width: 100%;
+    display: block;
+}
+
+.profile {
+    background-color: #1d539f !important;
+    text-align: center;
+    min-height: 320px;
+    margin-bottom: 50px;
+    padding: 30px 0;
+}
+
+.team {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 40px;
+    flex-wrap: wrap;
+}
+
+.profile-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.profile h1 {
+        font-size: 50px;
+        font-weight: 700;
+        color: white;
+}
+
+.profile-card h1 {
+        font-size: 28px;
+}
+
+.team-details {
+    max-width: 800px;
+    margin: 0 auto 40px;
+    padding: 0 20px;
+}
+
+.member-column {
+    margin-bottom: 48px;
+}
+
+.member-section {
+    margin-bottom: 24px;
+}
+
+.member-section h3 {
+    color: #1d539f;
+    margin-bottom: 12px;
+}
+
+.travel-map-section .map-hint {
+    color: #666;
+    margin-top: 0;
+    margin-bottom: 12px;
+}
+
+.travel-map {
+    width: 100%;
+    height: 400px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background: #e8eef7;
+}
+
+.travel-map .leaflet-container {
+    width: 100%;
+    height: 100%;
+    border-radius: 8px;
+}
+
+.travel-map-list {
+    list-style: none;
+    padding: 0;
+    margin: 16px 0 0;
+}
+
+.travel-map-list li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    background: white;
+    border-radius: 8px;
+    padding: 10px 12px;
+    margin-bottom: 8px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+.travel-map-empty {
+    justify-content: flex-start !important;
+    color: #666;
+    font-style: italic;
+}
+
+.profile img {
+        border-radius: 50%;
+        max-width: 100%;
+        max-height: 100%;
+        margin-left: auto;
+        margin-right: auto;
+        display: block;        
+        padding: 20px;
+}
+
+.profile .profile-picture {
+    margin-bottom: 30px;
+    height: 200px;
+}
+
+.banner {
+    padding: 20px 0px 50px 0px;
+    height: 150px;
+    background-color: #1d539f;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.banner .logo {
+    max-width:180px;
+    max-height:60px;
+    width: auto;
+    height: auto;
+}
+
+.banner .title {
+    color: white;
+    font-size: 50px;
+    font-weight: 700;
+    margin: 0;
+}

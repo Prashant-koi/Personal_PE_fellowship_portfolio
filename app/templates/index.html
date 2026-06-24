@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+{% from "macros.html" import profile_card, experience_card, education_card %}
+
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='vendor/leaflet/leaflet.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="profile">
+    <div class="team">
+        {% for member in team %}
+            {{ profile_card(member) }}
+        {% endfor %}
+    </div>
+</div>
+
+<div class="team-details">
+    {% for member in team %}
+    <div class="member-column" id="member-{{ loop.index }}">
+        <section class="member-section">
+            <h3>About Me</h3>
+            <p>{{ member.about }}</p>
+        </section>
+
+        <section class="member-section">
+            <h3>Work Experience</h3>
+            {% for job in member.work_experiences %}
+                {{ experience_card(job) }}
+            {% else %}
+                <p>No work experience added yet.</p>
+            {% endfor %}
+        </section>
+
+        <section class="member-section">
+            <h3>Education</h3>
+            {% for school in member.education %}
+                {{ education_card(school) }}
+            {% else %}
+                <p>No education added yet.</p>
+            {% endfor %}
+        </section>
+
+        <section class="member-section travel-map-section">
+            <h3>Places I've Been</h3>
+            <p class="map-hint">Click a pin to see where I've been.</p>
+            <div
+                class="travel-map"
+                id="travel-map-{{ loop.index }}"
+                data-member-id="{{ loop.index }}"
+                data-marker-icon="{{ url_for('static', filename='img/marker-pin.svg') }}"
+                data-places='{{ member.visited_places | default([], true) | tojson }}'
+            ></div>
+            <ul class="travel-map-list" id="travel-map-list-{{ loop.index }}"></ul>
+        </section>
+    </div>
+    {% endfor %}
+</div>
+
+<script src="{{ url_for('static', filename='vendor/leaflet/leaflet.js') }}"></script>
+<script src="{{ url_for('static', filename='js/travel-map.js') }}"></script>
+<script>
+    function setupTravelMaps() {
+        if (typeof L === "undefined" || typeof initTravelMaps !== "function") {
+            return;
+        }
+
+        initTravelMaps();
+    }
+
+    if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", setupTravelMaps);
+    } else {
+        setupTravelMaps();
+    }
+</script>
+{% endblock %}

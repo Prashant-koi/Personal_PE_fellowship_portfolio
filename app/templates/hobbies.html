@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% from "macros.html" import hobby_card %}
+
+{% block content %}
+<div class="banner">
+    <h1 class="title">{{ title }}</h1>
+</div>
+
+<div class="team-details">
+    {% for member in team %}
+    <div class="member-column">
+        <section class="member-section hobbies-list">
+            {% for hobby in member.hobbies %}
+                {{ hobby_card(hobby) }}
+            {% else %}
+                <p>No hobbies added yet.</p>
+            {% endfor %}
+        </section>
+    </div>
+    {% endfor %}
+</div>
+
+<script>
+    document.querySelectorAll(".hobby-bar").forEach(function (bar) {
+        bar.addEventListener("click", function () {
+            bar.parentElement.classList.toggle("open");
+        });
+    });
+</script>
+{% endblock %}
