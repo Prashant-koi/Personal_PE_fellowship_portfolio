@@ -14,7 +14,7 @@ member = {
             ),
         },
         {
-            "title": "Data Infrastructure Intern",
+            "title": "Data Infrastructure Engineering Intern",
             "company": "Gulf South Center, University of Southern Mississippi",
             "dates": "May 2026 - Present · Hattiesburg, MS",
             "description": (
