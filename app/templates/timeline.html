@@ -1,0 +1,102 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="banner">
+    <h1 class="title">{{ title }}</h1>
+</div>
+
+<div class="team-details">
+    <div class="member-column">
+        <section class="member-section">
+            <h3>Add a Timeline Post</h3>
+            <form id="timeline-form" class="timeline-form">
+                <input type="text" name="name" placeholder="Name" required>
+                <input type="email" name="email" placeholder="Email" required>
+                <textarea name="content" placeholder="What's on your mind?" required></textarea>
+                <button type="submit">Post</button>
+            </form>
+        </section>
+
+        <section class="member-section">
+            <h3>Timeline</h3>
+            <div id="timeline-posts">
+                <p>Loading posts…</p>
+            </div>
+        </section>
+    </div>
+</div>
+
+<script>
+    const form = document.getElementById("timeline-form");
+    const postsContainer = document.getElementById("timeline-posts");
+
+    // we need to escape theuser-provided text so it can't inject HTML
+    function escapeHtml(text) {
+        const div = document.createElement("div");
+        div.textContent = text;
+        return div.innerHTML;
+    }
+
+    // building a Gravatar URL from the email, d=404 makes Gravatar return an
+    // error when the email has no avatar so we can have our fallback in place
+    async function gravatarUrl(email, size = 100) {
+        const normalized = email.trim().toLowerCase();
+        const bytes = new TextEncoder().encode(normalized);
+        const hashBuffer = await crypto.subtle.digest("SHA-256", bytes);
+        const hash = [...new Uint8Array(hashBuffer)]
+            .map(function (b) { return b.toString(16).padStart(2, "0"); })
+            .join("");
+        return `https://www.gravatar.com/avatar/${hash}?s=${size}&d=404`;
+    }
+
+    // the default avatar will be the first letter of the name which also acts as a fallback
+    // the gravatar image sits on top of it if it loads
+    async function renderPost(post) {
+        const url = await gravatarUrl(post.email);
+        const letter = escapeHtml((post.name.trim()[0] || "?").toUpperCase());
+        return `
+            <div class="card timeline-post">
+                <div class="avatar">
+                    <span>${letter}</span>
+                    <img src="${url}" alt="${escapeHtml(post.name)}" onerror="this.remove()">
+                </div>
+                <div class="timeline-post-body">
+                    <h3>${escapeHtml(post.name)}</h3>
+                    <p class="dates">${escapeHtml(post.email)} - ${escapeHtml(post.created_at)}</p>
+                    <p>${escapeHtml(post.content)}</p>
+                </div>
+            </div>
+        `;
+    }
+
+    // Fetch all posts and render them the enpoint already sorts in descending order
+    async function loadPosts() {
+        const response = await fetch("/api/timeline_post");
+        const data = await response.json();
+        const posts = data.timeline_posts;
+
+        if (posts.length === 0) {
+            postsContainer.innerHTML = "<p>No timeline posts yet.</p>";
+            return;
+        }
+
+        const rendered = await Promise.all(posts.map(renderPost));
+        postsContainer.innerHTML = rendered.join("");
+    }
+
+    form.addEventListener("submit", async function (event) {
+        event.preventDefault();
+
+        const formData = new FormData(form);
+        await fetch("/api/timeline_post", {
+            method: "POST",
+            body: formData,
+        });
+
+        form.reset();
+        loadPosts();
+    });
+
+    loadPosts();
+</script>
+{% endblock %}

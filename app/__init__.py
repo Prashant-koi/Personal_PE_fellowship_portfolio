@@ -42,6 +42,7 @@ team = [
 pages = [
     {"endpoint": "index", "name": "Home", "url": "/"},
     {"endpoint": "hobbies", "name": "Hobbies", "url": "/hobbies"},
+    {"endpoint": "timeline", "name": "Timeline", "url": "/timeline"},
 ]
 
 
@@ -61,6 +62,16 @@ def hobbies_page():
     return render_template(
         "hobbies.html",
         title="My Hobbies",
+        url=os.getenv("URL"),
+        team=team,
+        pages=pages,
+    )
+
+@app.route('/timeline')
+def timeline():
+    return render_template(
+        'timeline.html',
+        title="Timeline",
         url=os.getenv("URL"),
         team=team,
         pages=pages,
