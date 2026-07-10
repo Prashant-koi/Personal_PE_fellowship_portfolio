@@ -40,6 +40,10 @@
     // building a Gravatar URL from the email, d=404 makes Gravatar return an
     // error when the email has no avatar so we can have our fallback in place
     async function gravatarUrl(email, size = 100) {
+        // crypto.subtle only exists in a secure context HTTPS or localhost which was leading with problems for the droplet deployement
+        if (!window.crypto || !crypto.subtle) {
+            return null;
+        }
         const normalized = email.trim().toLowerCase();
         const bytes = new TextEncoder().encode(normalized);
         const hashBuffer = await crypto.subtle.digest("SHA-256", bytes);
@@ -52,13 +56,21 @@
     // the default avatar will be the first letter of the name which also acts as a fallback
     // the gravatar image sits on top of it if it loads
     async function renderPost(post) {
-        const url = await gravatarUrl(post.email);
+        let url = null;
+        try {
+            url = await gravatarUrl(post.email);
+        } catch (e) {
+            url = null;  // render post even if there is avatar failure
+        }
         const letter = escapeHtml((post.name.trim()[0] || "?").toUpperCase());
+        const img = url
+            ? `<img src="${url}" alt="${escapeHtml(post.name)}" onerror="this.remove()">`
+            : "";
         return `
             <div class="card timeline-post">
                 <div class="avatar">
                     <span>${letter}</span>
-                    <img src="${url}" alt="${escapeHtml(post.name)}" onerror="this.remove()">
+                    ${img}
                 </div>
                 <div class="timeline-post-body">
                     <h3>${escapeHtml(post.name)}</h3>
