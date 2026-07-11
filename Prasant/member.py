@@ -11,6 +11,7 @@ member = {
             "dates": "June 2026 - Present · Remote",
             "description": (
                 "Learn product engineering over the course of 12 weeks with other fellows and with help and support from mentors from MLH and Meta."
+                "Learned bash scripting, Linux fundamentals, including processes, systemd services, and auto deployment through a VPS."
             ),
         },
         {
@@ -18,7 +19,7 @@ member = {
             "company": "Gulf South Center, University of Southern Mississippi",
             "dates": "May 2026 - Present · Hattiesburg, MS",
             "description": (
-                "Developed the data infrastructure, including the database and the infra around it, for a group of researchers to ensure easy and fast access to reliable data for research."
+                "Developed the data infrastructure, including the database and the infrastructure around it, for a group of researchers to ensure easy and fast access to reliable data for research."
             ),
         }
     ],
