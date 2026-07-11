@@ -10,7 +10,7 @@ member = {
             "company": "Major League Hacking (MLH)",
             "dates": "June 2026 - Present · Remote",
             "description": (
-                "Learn product engineering over the course of 12 weeks with other fellows and with help and support from mentors from MLH and Meta."
+                "Learn product engineering over the course of 12 weeks with other fellows and with help and support from mentors from MLH and Meta. "
                 "Learned bash scripting, Linux fundamentals, including processes, systemd services, and auto deployment through a VPS."
             ),
         },
